@@ -26,7 +26,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String uniqueId) {
-
+        log.info("login param uniqueId:{}" ,uniqueId);
         User user = userService.getByUniqueId(uniqueId);
         log.info("load user by username :{}", user.toString());
 

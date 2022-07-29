@@ -1,9 +1,9 @@
 spring:
   rabbitmq:
-    host: ${RABBIT_MQ_HOST:localhost}
+    host: ${RABBIT_MQ_HOST:10.4.14.43}
     port: ${RABBIT_MQ_PORT:5672}
-    username: ${RABBIT_MQ_USERNAME:guest}
-    password: ${RABBIT_MQ_PASSWORD:guest}
+    username: ${RABBIT_MQ_USERNAME:root}
+    password: ${RABBIT_MQ_PASSWORD:hEB$%47kikVNa8S5}
   zipkin:
     sender:
       type: rabbit
