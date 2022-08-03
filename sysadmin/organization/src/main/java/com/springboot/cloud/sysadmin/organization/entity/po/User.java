@@ -28,6 +28,7 @@ public class User extends BasePo {
     private Boolean accountNonLocked;
     @TableField(exist = false)
     private Set<String> roleIds;
+    private String roles;
     @TableLogic
     private String deleted = "N";
     private String email;

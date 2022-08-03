@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.cloud.sysadmin.organization.dao.UserMapper">
+
+    <resultMap id="user" type="com.springboot.cloud.sysadmin.organization.entity.po.User"></resultMap>
+    <parameterMap id="userParam" type="com.springboot.cloud.sysadmin.organization.entity.param.UserQueryParam"></parameterMap>
+
+    <select id="getUserList" resultMap="user"
+            parameterMap="userParam">
+        select u.id,u.username,u.name,GROUP_CONCAT(r.name) AS roles,u.mobile,u.email
+        from users u left join user_role_relation ur
+                               on u.id = ur.user_id
+                     left join roles r
+                               on r.id = ur.role_id
+        where 1=1
+
+            <!--u.username like concat_ws('','%',#{},'%')-->
+
+        group by u.id
+    </select>
+
+
+</mapper>

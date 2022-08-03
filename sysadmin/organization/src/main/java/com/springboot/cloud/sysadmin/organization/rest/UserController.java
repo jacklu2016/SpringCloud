@@ -72,6 +72,8 @@ public class UserController {
     @PostMapping(value = "/conditions")
     public Result search(@Valid @RequestBody UserQueryForm userQueryForm) {
         log.debug("search with userQueryForm:{}", userQueryForm);
+
+        userService.getUserList(userQueryForm.getPage(),userQueryForm.toParam(UserQueryParam.class));
         return Result.success(userService.query(userQueryForm.getPage(), userQueryForm.toParam(UserQueryParam.class)));
     }
 }

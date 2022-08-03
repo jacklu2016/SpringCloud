@@ -2,9 +2,12 @@ package com.springboot.cloud.sysadmin.organization.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.springboot.cloud.sysadmin.organization.entity.form.UserQueryForm;
 import com.springboot.cloud.sysadmin.organization.entity.param.UserQueryParam;
 import com.springboot.cloud.sysadmin.organization.entity.po.User;
 import com.springboot.cloud.sysadmin.organization.entity.vo.UserVo;
+
+import java.util.List;
 
 public interface IUserService {
     /**
@@ -52,4 +55,6 @@ public interface IUserService {
      * @param id
      */
     boolean delete(String id);
+
+    List<User> getUserList(Page page, UserQueryParam userQueryParam);
 }

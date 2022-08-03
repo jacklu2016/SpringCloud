@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.springboot.cloud.sysadmin.organization.dao.UserMapper;
+import com.springboot.cloud.sysadmin.organization.entity.form.UserQueryForm;
 import com.springboot.cloud.sysadmin.organization.entity.param.UserQueryParam;
 import com.springboot.cloud.sysadmin.organization.entity.po.User;
 import com.springboot.cloud.sysadmin.organization.entity.vo.UserVo;
@@ -23,6 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -31,6 +33,9 @@ public class UserService extends ServiceImpl<UserMapper, User> implements IUserS
 
     @Autowired
     private IUserRoleService userRoleService;
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -100,5 +105,12 @@ public class UserService extends ServiceImpl<UserMapper, User> implements IUserS
         // 转换成VO
         IPage<User> iPageUser = this.page(page, queryWrapper);
         return iPageUser.convert(UserVo::new);
+    }
+
+    @Override
+    public List<User> getUserList(Page page, UserQueryParam userQueryParam){
+        IPage<User> iPageUser = this.page(page);
+        List<User> userList = userMapper.getUserList(userQueryParam);
+        return userList;
     }
 }
