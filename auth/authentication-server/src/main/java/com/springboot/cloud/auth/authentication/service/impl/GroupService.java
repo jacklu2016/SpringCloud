@@ -26,6 +26,6 @@ public class GroupService implements IGroupService {
     public List<GroupDTO> queryGroupsByUsername(String username) {
         Result<List<GroupDTO>> groups = resourceProvider.groups(username);
         log.info("username:{},groups:{}", username, groups);
-        return groups.getData();
+        return groups.getResult();
     }
 }

@@ -40,7 +40,8 @@ public class RouteService implements IRouteService {
         log.info("loadRouteDefinition, 开始初使化路由");
         Set<String> gatewayKeys = stringRedisTemplate.keys(GATEWAY_ROUTES + "*");
         if (CollectionUtils.isEmpty(gatewayKeys)) {
-            return;
+            //return;
+            //为什么要return， 直接加载到redis
         }
         log.info("预计初使化路由, gatewayKeys：{}", gatewayKeys);
         // 去掉key的前缀

@@ -35,6 +35,9 @@ public class UserForm extends BaseForm<User> {
     @ApiModelProperty(value = "用户描述")
     private String description;
 
+    @ApiModelProperty(value = "邮箱")
+    private String email;
+
     @ApiModelProperty(value = "用户拥有的角色id列表")
     private Set<String> roleIds;
 
@@ -49,4 +52,6 @@ public class UserForm extends BaseForm<User> {
 
     @ApiModelProperty(value = "用户账号是否被锁定，true为未锁定")
     private Boolean accountNonLocked = true;
+
+
 }

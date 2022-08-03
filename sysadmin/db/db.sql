@@ -388,6 +388,11 @@ INSERT INTO sc_admin.role_resource_relation (id, resource_id, role_id, created_t
                                              updated_by)
 VALUES ('601', '401', '101', DEFAULT, DEFAULT, 'system', 'system');
 
+--customize script
+ALTER TABLE `sc_admin`.`users`
+    ADD COLUMN `dept_id` bigint NULL COMMENT '部门' AFTER `updated_by`;
+ALTER TABLE `sc_admin`.`users`
+    ADD COLUMN `email` varchar(255) NULL COMMENT '邮箱' AFTER `dept_id`;
 
 
 

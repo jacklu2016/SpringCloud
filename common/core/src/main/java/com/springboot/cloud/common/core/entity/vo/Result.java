@@ -8,7 +8,6 @@ import com.springboot.cloud.common.core.exception.SystemErrorType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.Getter;
 
 import java.time.Instant;
 import java.time.ZonedDateTime;
@@ -28,7 +27,7 @@ public class Result<T> {
     private Instant time;
     @ApiModelProperty(value = "处理结果数据信息")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private T data;
+    private T result;
 
     public Result() {
         this.time = ZonedDateTime.now().toInstant();
@@ -45,11 +44,11 @@ public class Result<T> {
 
     /**
      * @param errorType
-     * @param data
+     * @param result
      */
-    public Result(ErrorType errorType, T data) {
+    public Result(ErrorType errorType, T result) {
         this(errorType);
-        this.data = data;
+        this.result = result;
     }
 
     /**
@@ -57,12 +56,12 @@ public class Result<T> {
      *
      * @param code
      * @param mesg
-     * @param data
+     * @param result
      */
-    private Result(String code, String mesg, T data) {
+    private Result(String code, String mesg, T result) {
         this.code = code;
         this.mesg = mesg;
-        this.data = data;
+        this.result = result;
         this.time = ZonedDateTime.now().toInstant();
     }
 

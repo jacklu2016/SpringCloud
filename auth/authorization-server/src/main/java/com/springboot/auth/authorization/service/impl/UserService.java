@@ -14,6 +14,6 @@ public class UserService implements IUserService {
 
     @Override
     public User getByUniqueId(String uniqueId) {
-        return organizationProvider.getUserByUniqueId(uniqueId).getData();
+        return organizationProvider.getUserByUniqueId(uniqueId).getResult();
     }
 }

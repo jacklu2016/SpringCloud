@@ -60,7 +60,7 @@ public class ResourceService implements IResourceService {
         if (resourcesResult.isFail()) {
             System.exit(1);
         }
-        Set<Resource> resources = resourcesResult.getData();
+        Set<Resource> resources = resourcesResult.getResult();
         Map<MvcRequestMatcher, SecurityConfig> tempResourceConfigAttributes = resources.stream()
                 .collect(Collectors.toMap(
                         resource -> this.newMvcRequestMatcher(resource.getUrl(), resource.getMethod()),
@@ -83,7 +83,7 @@ public class ResourceService implements IResourceService {
     @Override
     @Cached(name = "resource4user::", key = "#username", cacheType = CacheType.BOTH,expire = 5)
     public Set<Resource> queryByUsername(String username) {
-        return resourceProvider.resources(username).getData();
+        return resourceProvider.resources(username).getResult();
     }
 
 

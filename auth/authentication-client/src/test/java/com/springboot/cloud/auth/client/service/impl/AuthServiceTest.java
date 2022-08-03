@@ -65,13 +65,13 @@ public class AuthServiceTest {
     @Test
     public void testAuthenticate_假如用户authentication正确且有对请求url有权限_当用户请求该url_那么返回成功有权限() {
         when(authProvider.auth(BEARER + VALID_TOKEN, "/users", "POST")).thenReturn(Result.success(true));
-        Assert.assertTrue((Boolean) authService.authenticate(BEARER + VALID_TOKEN, "/users", "POST").getData());
+        Assert.assertTrue((Boolean) authService.authenticate(BEARER + VALID_TOKEN, "/users", "POST").getResult());
     }
 
     @Test
     public void testAuthenticate_假如用户authentication正确且有对请求url只有POST权限_当用户请求该url的GET_那么返回成功无权限() {
         when(authProvider.auth(BEARER + VALID_TOKEN, "/users", "GET")).thenReturn(Result.success(false));
-        Assert.assertFalse((Boolean) authService.authenticate(BEARER + VALID_TOKEN, "/users", "GET").getData());
+        Assert.assertFalse((Boolean) authService.authenticate(BEARER + VALID_TOKEN, "/users", "GET").getResult());
     }
 
     @Test

@@ -30,4 +30,6 @@ public class User extends BasePo {
     private Set<String> roleIds;
     @TableLogic
     private String deleted = "N";
+    private String email;
+    private Long deptId;
 }

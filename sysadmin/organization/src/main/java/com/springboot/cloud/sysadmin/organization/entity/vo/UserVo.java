@@ -27,4 +27,6 @@ public class UserVo extends BaseVo<User> {
     private String updatedBy;
     private Date createdTime;
     private Date updatedTime;
+    private String email;
+    private String roles;
 }

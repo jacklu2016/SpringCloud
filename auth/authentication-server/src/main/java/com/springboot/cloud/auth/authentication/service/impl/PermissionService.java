@@ -24,7 +24,7 @@ public class PermissionService implements IPermissionService {
     //在一个JVM中，同一个键只有一个线程加载，其他线程等待结果。
 //    @CachePenetrationProtect
     public List<PermissionDTO> queryPermissionsByGroupCode(PermissionDTO permissionDTO) {
-        return resourceProvider.permissions(permissionDTO).getData();
+        return resourceProvider.permissions(permissionDTO).getResult();
     }
 
 }
