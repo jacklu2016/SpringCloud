@@ -135,6 +135,7 @@ mybatis-plus:
     # 数据库字段驼峰下划线转换
     db-column-underline: true
     # id自增类型(数据库id自增)
-    id-type: 0
-    logic-delete-value: "Y" # 逻辑已删除值(默认为 Y)
-    logic-not-delete-value: "N" # 逻辑未删除值(默认为 N)
+    db-config:
+      logic-delete-value: "Y" # 逻辑已删除值(默认为 Y)
+      logic-not-delete-value: "N" # 逻辑未删除值(默认为 N)
+      id-type: none

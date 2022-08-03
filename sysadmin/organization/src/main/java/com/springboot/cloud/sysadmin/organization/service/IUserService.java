@@ -56,5 +56,5 @@ public interface IUserService {
      */
     boolean delete(String id);
 
-    List<User> getUserList(Page page, UserQueryParam userQueryParam);
+    IPage<User> getUserList(Page page, UserQueryParam userQueryParam);
 }

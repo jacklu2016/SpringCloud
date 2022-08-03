@@ -108,9 +108,9 @@ public class UserService extends ServiceImpl<UserMapper, User> implements IUserS
     }
 
     @Override
-    public List<User> getUserList(Page page, UserQueryParam userQueryParam){
+    public IPage<User> getUserList(Page page, UserQueryParam userQueryParam){
         IPage<User> iPageUser = this.page(page);
-        List<User> userList = userMapper.getUserList(userQueryParam);
+        IPage<User> userList = userMapper.getUserList(iPageUser, userQueryParam);
         return userList;
     }
 }

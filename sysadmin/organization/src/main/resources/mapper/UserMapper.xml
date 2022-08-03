@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.springboot.cloud.sysadmin.organization.dao.UserMapper">
 
-    <resultMap id="user" type="com.springboot.cloud.sysadmin.organization.entity.po.User"></resultMap>
+    <resultMap id="user" type="com.springboot.cloud.sysadmin.organization.entity.vo.UserVo"></resultMap>
     <parameterMap id="userParam" type="com.springboot.cloud.sysadmin.organization.entity.param.UserQueryParam"></parameterMap>
 
     <select id="getUserList" resultMap="user"
@@ -13,8 +13,13 @@
                      left join roles r
                                on r.id = ur.role_id
         where 1=1
-
-            <!--u.username like concat_ws('','%',#{},'%')-->
+        <if test="userQueryParam.username != null and userQueryParam.username != ''">
+            and u.username like concat('%',#{userQueryParam.username},'%')
+        </if>
+        <if test="userQueryParam.name != null and userQueryParam.name != ''">
+            and u.name like concat('%',#{userQueryParam.name},'%')
+        </if>
+            <!---->
 
         group by u.id
     </select>
