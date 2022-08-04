@@ -121,6 +121,7 @@ logging:
 mybatis-plus:
   # xml文件路径
   mapper-locations: classpath:mapper/*.xml
+  #mapper-locations: classpath:/com/springboot/cloud/sysadmin/organization/dao/*.xml
   # 实体类路径
   type-aliases-package: com.springboot.cloud.sysadmin.organization.entity.po
   configuration:

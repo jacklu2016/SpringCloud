@@ -64,6 +64,12 @@ public class RoleController {
         return Result.success(roleService.getAll());
     }
 
+    @ApiOperation(value = "获取所有角色", notes = "获取所有角色")
+    @GetMapping(value = "/getAllWithId")
+    public Result getAllWithId() {
+        return Result.success(roleService.getAll());
+    }
+
     @ApiOperation(value = "查询角色", notes = "根据用户id查询用户所拥有的角色信息")
     @ApiImplicitParam(paramType = "path", name = "userId", value = "用户id", required = true, dataType = "string")
     @ApiResponses(
@@ -83,6 +89,6 @@ public class RoleController {
     @PostMapping(value = "/conditions")
     public Result query(@Valid @RequestBody RoleQueryForm roleQueryForm) {
         log.debug("query with name:{}", roleQueryForm);
-        return Result.success(roleService.query(roleQueryForm.getPage(), roleQueryForm.toParam(RoleQueryParam.class)));
+        return Result.success(roleService.query(roleQueryForm.getPageParam(), roleQueryForm.toParam(RoleQueryParam.class)));
     }
 }

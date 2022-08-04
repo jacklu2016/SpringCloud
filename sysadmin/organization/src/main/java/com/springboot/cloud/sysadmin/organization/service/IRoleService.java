@@ -23,6 +23,8 @@ public interface IRoleService {
      */
     List<Role> getAll();
 
+    List<Role> getAllWithId();
+
     /**
      * 新增角色
      *

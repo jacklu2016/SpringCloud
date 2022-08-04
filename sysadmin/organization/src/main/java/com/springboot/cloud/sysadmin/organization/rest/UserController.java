@@ -73,7 +73,8 @@ public class UserController {
     public Result search(@Valid @RequestBody UserQueryForm userQueryForm) {
         log.debug("search with userQueryForm:{}", userQueryForm);
 
-        userService.getUserList(userQueryForm.getPage(),userQueryForm.toParam(UserQueryParam.class));
-        return Result.success(userService.query(userQueryForm.getPage(), userQueryForm.toParam(UserQueryParam.class)));
+        //自定义SQL XML文件测试
+        userService.getUserList(userQueryForm.getPageParam(),userQueryForm.toParam(UserQueryParam.class));
+        return Result.success(userService.query(userQueryForm.getPageParam(), userQueryForm.toParam(UserQueryParam.class)));
     }
 }

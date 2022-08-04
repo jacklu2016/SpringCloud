@@ -14,11 +14,11 @@ public class BaseQueryForm<P extends BaseParam> extends BaseForm {
     /**
      * 分页查询的参数，当前页数
      */
-    private long current = 1;
+    private long page = 1;
     /**
      * 分页查询的参数，当前页面每页显示的数量
      */
-    private long size = 10;
+    private long pageSize = 10;
 
     /**
      * Form转化为Param
@@ -37,8 +37,8 @@ public class BaseQueryForm<P extends BaseParam> extends BaseForm {
      *
      * @return
      */
-    public Page getPage() {
-        return new Page(this.getCurrent(), this.getSize());
+    public Page getPageParam() {
+        return new Page(this.getPage(), this.getPageSize());
     }
 
 }
