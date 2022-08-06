@@ -39,7 +39,7 @@ cd -
 #cd facade && mvn install -DskipTests=true
 echo '==================3.安装认证客户端到本地maven仓库=================='
 #安装认证客户端到本地maven仓库
-cd auth/authentication-client && mvn install -DskipTests=true
+cd auth/authentication-client && mvn install
 echo '当前目录:' && pwd
 
 #回到根目录
@@ -56,6 +56,8 @@ echo ''
 #按需要开启公共服务
 echo '==================4.2启动 mysql or redis or rabbitmq ========'
 docker-compose -f docker-compose.yml up -d mysql
+#初始化sql脚本
+docker-compose -f docker-compose.yml up -d mysql-init
 docker-compose -f docker-compose.yml up -d redis
 docker-compose -f docker-compose.yml up -d rabbitmq
 
