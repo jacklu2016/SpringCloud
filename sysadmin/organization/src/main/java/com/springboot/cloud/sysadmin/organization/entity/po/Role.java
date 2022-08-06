@@ -16,6 +16,7 @@ import java.util.Set;
 @AllArgsConstructor
 @TableName("roles")
 public class Role extends BasePo {
+    private String id;
     private String code;
     private String name;
     private String description;

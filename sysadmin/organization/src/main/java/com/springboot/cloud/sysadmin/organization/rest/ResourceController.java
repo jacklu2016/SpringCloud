@@ -85,6 +85,6 @@ public class ResourceController {
     @PostMapping(value = "/conditions")
     public Result query(@Valid @RequestBody ResourceQueryForm resourceQueryForm) {
         log.debug("query with name:{}", resourceQueryForm);
-        return Result.success(resourceService.query(resourceQueryForm.getPage(), resourceQueryForm.toParam(ResourceQueryParam.class)));
+        return Result.success(resourceService.query(resourceQueryForm.getPageParam(), resourceQueryForm.toParam(ResourceQueryParam.class)));
     }
 }
