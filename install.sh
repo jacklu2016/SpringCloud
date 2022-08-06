@@ -36,10 +36,10 @@ echo '当前目录:' && pwd
 
 #回到根目录
 cd -
-
+#cd facade && mvn install -DskipTests=true
 echo '==================3.安装认证客户端到本地maven仓库=================='
 #安装认证客户端到本地maven仓库
-cd auth/authentication-client && mvn install
+cd auth/authentication-client && mvn install -DskipTests=true
 echo '当前目录:' && pwd
 
 #回到根目录
