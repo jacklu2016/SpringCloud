@@ -1,0 +1,219 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose --file docker-compose.spring-gateway.yml convert
+    kompose.version: 1.24.0 (4a2a0458)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: gateway-web
+  name: gateway-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: gateway-web
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose --file docker-compose.spring-gateway.yml convert
+        kompose.version: 1.24.0 (4a2a0458)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/sc-net: "true"
+        io.kompose.service: gateway-web
+    spec:
+      containers:
+        - env:
+            - name: DATASOURCE_DBTYPE
+              valueFrom:
+                configMapKeyRef:
+                  key: DATASOURCE_DBTYPE
+                  name: env
+            - name: DATASOURCE_DRIVER
+              valueFrom:
+                configMapKeyRef:
+                  key: DATASOURCE_DRIVER
+                  name: env
+            - name: DATASOURCE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: DATASOURCE_HOST
+                  name: env
+            - name: DATASOURCE_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: DATASOURCE_PASSWORD
+                  name: env
+            - name: DATASOURCE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: DATASOURCE_PORT
+                  name: env
+            - name: DATASOURCE_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  key: DATASOURCE_USERNAME
+                  name: env
+            - name: DB_ADAPTER
+              valueFrom:
+                configMapKeyRef:
+                  key: DB_ADAPTER
+                  name: env
+            - name: 'DB_ADAPTER:'
+              value: mysql
+            - name: DB_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  key: DB_DATABASE
+                  name: env
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: DB_HOST
+                  name: env
+            - name: DB_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: DB_PASSWORD
+                  name: env
+            - name: DB_PG_SCHEMA
+              valueFrom:
+                configMapKeyRef:
+                  key: DB_PG_SCHEMA
+                  name: env
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: DB_PORT
+                  name: env
+            - name: DB_USER
+              valueFrom:
+                configMapKeyRef:
+                  key: DB_USER
+                  name: env
+            - name: KONG_ADMIN_LISTEN
+              valueFrom:
+                configMapKeyRef:
+                  key: KONG_ADMIN_LISTEN
+                  name: env
+            - name: KONG_ADMIN_LISTEN_SSL
+              valueFrom:
+                configMapKeyRef:
+                  key: KONG_ADMIN_LISTEN_SSL
+                  name: env
+            - name: KONG_CASSANDRA_CONTACT_POINTS
+              valueFrom:
+                configMapKeyRef:
+                  key: KONG_CASSANDRA_CONTACT_POINTS
+                  name: env
+            - name: KONG_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  key: KONG_DATABASE
+                  name: env
+            - name: KONG_PG_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: KONG_PG_HOST
+                  name: env
+            - name: MOSS_DB_TYPE
+              valueFrom:
+                configMapKeyRef:
+                  key: MOSS_DB_TYPE
+                  name: env
+            - name: MOSS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: MOSS_PORT
+                  name: env
+            - name: MOSS_SKYWALKING_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: MOSS_SKYWALKING_HOST
+                  name: env
+            - name: MOSS_SKYWALKING_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: MOSS_SKYWALKING_PORT
+                  name: env
+            - name: NODE_ENV
+              valueFrom:
+                configMapKeyRef:
+                  key: NODE_ENV
+                  name: env
+            - name: RABBIT_MQ_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: RABBIT_MQ_HOST
+                  name: env
+            - name: RABBIT_MQ_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: RABBIT_MQ_PASSWORD
+                  name: env
+            - name: RABBIT_MQ_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: RABBIT_MQ_PORT
+                  name: env
+            - name: RABBIT_MQ_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  key: RABBIT_MQ_USERNAME
+                  name: env
+            - name: REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: REDIS_HOST
+                  name: env
+            - name: REDIS_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: REDIS_PASSWORD
+                  name: env
+            - name: REDIS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: REDIS_PORT
+                  name: env
+            - name: REGISTER_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: REGISTER_HOST
+                  name: env
+            - name: REGISTER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: REGISTER_PORT
+                  name: env
+            - name: SENTINEL_DASHBOARD_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: SENTINEL_DASHBOARD_HOST
+                  name: env
+            - name: SENTINEL_DASHBOARD_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: SENTINEL_DASHBOARD_PORT
+                  name: env
+            - name: SW_AGENT_OPTS
+              valueFrom:
+                configMapKeyRef:
+                  key: SW_AGENT_OPTS
+                  name: env
+            - name: TOKEN_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  key: TOKEN_SECRET
+                  name: env
+            - name: TZ
+              value: Asia/Shanghai
+          image: cike/gateway-web:latest
+          name: sc-gateway-web
+          ports:
+            - containerPort: 8443
+          resources: {}
+      restartPolicy: Always
+status: {}
