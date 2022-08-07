@@ -18,8 +18,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @Slf4j
 public class BusConfig {
-    //@Value("${spring.application.name}")
-    //private String appName;
+    @Value("${spring.application.name}")
+    private String appName;
 
     public static final String QUEUE_NAME = "event-organization";
     public static final String EXCHANGE_NAME = "spring-boot-exchange";
