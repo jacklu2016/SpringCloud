@@ -120,11 +120,13 @@ cd -
 #去docker-compose目录
 cd docker-compose
 
-#启动网关服务
-docker-compose -f docker-compose.yml -f docker-compose.spring-gateway.yml up -d gateway-web
 
 #启动网关管理服务
 docker-compose -f docker-compose.yml -f docker-compose.spring-gateway.yml up -d gateway-admin
+
+#启动网关服务
+docker-compose -f docker-compose.yml -f docker-compose.spring-gateway.yml up -d gateway-web
+
 
 #回到根目录
 cd -
