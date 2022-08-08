@@ -41,6 +41,8 @@ logging:
     org.springframework.security: DEBUG
     org.apache.ibatis: debug
     java.sql.PreparedStatement: debug
+    com.alibaba.nacos.client.naming: WARN
+    com.alibaba.nacos.client.config.impl: WARN
   path: logs/
   file:
     max-size: 1GB
