@@ -5,10 +5,14 @@ metadata:
   labels:
     io.kompose.service: mysql-claim0
   name: mysql-claim0
+  namespace: sc
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 100Mi
+  selector:
+    matchLabels:
+      pv: pv-mysql
 status: {}

@@ -11,7 +11,7 @@ spring:
     username: ${RABBIT_MQ_USERNAME:root}
     password: ${RABBIT_MQ_PASSWORD:hEB$%47kikVNa8S5}
   redis:
-    host: ${REDIS_HOST:localhost}
+    host: ${REDIS_HOST:10.4.14.24}
     port: ${REDIS_PORT:6379}
     lettuce:
       pool:
@@ -75,7 +75,7 @@ jetcache:
         minIdle: 5
         maxIdle: 20
         maxTotal: 50
-      host: ${REDIS_HOST:localhost}
+      host: ${REDIS_HOST:10.4.14.24}
       port: ${REDIS_PORT:6379}
     # 长时远程緩存，主要用于要求时效要求一般的集中式缓存
     longTime:
@@ -88,7 +88,7 @@ jetcache:
         minIdle: 5
         maxIdle: 20
         maxTotal: 50
-      host: ${REDIS_HOST:localhost}
+      host: ${REDIS_HOST:10.4.14.24}
       port: ${REDIS_PORT:6379}
     # 短時远程緩存，主要用于要求时效较高的集中式缓存
     shortTime:
@@ -101,7 +101,7 @@ jetcache:
         minIdle: 5
         maxIdle: 20
         maxTotal: 50
-      host: ${REDIS_HOST:localhost}
+      host: ${REDIS_HOST:10.4.14.24}
       port: ${REDIS_PORT:6379}
 
 management:

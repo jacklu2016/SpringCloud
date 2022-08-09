@@ -209,7 +209,7 @@ spec:
                 configMapKeyRef:
                   key: TOKEN_SECRET
                   name: env
-          image: rabbitmq:management-alpine
+          image: lo-harbor.yyjzt.com/sassflow/rabbitmq
           name: sc-rabbitmq
           ports:
             - containerPort: 5672

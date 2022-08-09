@@ -5,7 +5,7 @@ spring:
     username: ${RABBIT_MQ_USERNAME:admin}
     password: ${RABBIT_MQ_PASSWORD:123456}
   redis:
-    host: ${REDIS_HOST:localhost}
+    host: ${REDIS_HOST:10.4.14.24}
     port: ${REDIS_PORT:6379}
     #password: ${REDIS_PASSWORD:jzt600998}
   datasource:

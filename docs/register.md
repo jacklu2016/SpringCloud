@@ -100,5 +100,5 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: ${REGISTER_HOST:localhost}:${REGISTER_PORT:8848}
+        server-addr: ${REGISTER_HOST:10.4.14.24}:${REGISTER_PORT:8848}
 ```

@@ -7,7 +7,7 @@ spring:
     username: ${RABBIT_MQ_USERNAME:root}
     password: ${RABBIT_MQ_PASSWORD:hEB$%47kikVNa8S5}
   redis:
-    host: ${REDIS_HOST:localhost}
+    host: ${REDIS_HOST:10.4.14.24}
     port: ${REDIS_PORT:6379}
     #password: ${REDIS_PASSWORD:}
     lettuce:
@@ -50,7 +50,7 @@ jetcache:
         minIdle: 5
         maxIdle: 20
         maxTotal: 50
-      host: ${REDIS_HOST:localhost}
+      host: ${REDIS_HOST:10.4.14.24}
       port: ${REDIS_PORT:6379}
 
 management:
