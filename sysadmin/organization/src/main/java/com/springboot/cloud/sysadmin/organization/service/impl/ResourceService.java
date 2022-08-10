@@ -90,6 +90,7 @@ public class ResourceService extends ServiceImpl<ResourceMapper, Resource> imple
         List<Role> roles = roleService.query(user.getId());
         //提取用户所拥有角色id列表
         Set<String> roleIds = roles.stream().map(role -> role.getId()).collect(Collectors.toSet());
+        log.info("getResource-roleIds:{}",roleIds);
         //根据角色列表查询到角色的资源的关联关系
         List<RoleResource> roleResources = roleResourceService.queryByRoleIds(roleIds);
         //根据资源列表查询出所有资源对象

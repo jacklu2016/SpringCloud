@@ -6,13 +6,14 @@ metadata:
     kompose.version: 1.24.0 (4a2a0458)
   creationTimestamp: null
   labels:
-    io.kompose.service: organization
-  name: organization
+    io.kompose.service: authentication-server
+  name: authentication-server
+  namespace: sc
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      io.kompose.service: organization
+      io.kompose.service: authentication-server
   strategy: {}
   template:
     metadata:
@@ -22,7 +23,7 @@ spec:
       creationTimestamp: null
       labels:
         io.kompose.network/sc-net: "true"
-        io.kompose.service: organization
+        io.kompose.service: authentication-server
     spec:
       containers:
         - env:
@@ -61,8 +62,6 @@ spec:
                 configMapKeyRef:
                   key: DB_ADAPTER
                   name: env
-            - name: 'DB_ADAPTER:'
-              value: mysql
             - name: DB_DATABASE
               valueFrom:
                 configMapKeyRef:
@@ -210,10 +209,10 @@ spec:
                   name: env
             - name: TZ
               value: Asia/Shanghai
-          image: cike/organization:latest
-          name: sc-organization
+          image: lo-harbor.yyjzt.com/sassflow/authentication-server:latest
+          name: sc-authentication-server
           ports:
-            - containerPort: 8010
+            - containerPort: 8001
           resources: {}
       restartPolicy: Always
 status: {}

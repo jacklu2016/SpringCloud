@@ -2,28 +2,28 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert
+    kompose.cmd: kompose --file docker-compose.auth.yml convert
     kompose.version: 1.24.0 (4a2a0458)
   creationTimestamp: null
   labels:
-    io.kompose.service: rabbitmq
-  name: rabbitmq
+    io.kompose.service: organization
+  name: organization
+  namespace: sc
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      io.kompose.service: rabbitmq
-  strategy:
-    type: Recreate
+      io.kompose.service: organization
+  strategy: {}
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose convert
+        kompose.cmd: kompose --file docker-compose.auth.yml convert
         kompose.version: 1.24.0 (4a2a0458)
       creationTimestamp: null
       labels:
         io.kompose.network/sc-net: "true"
-        io.kompose.service: rabbitmq
+        io.kompose.service: organization
     spec:
       containers:
         - env:
@@ -62,8 +62,6 @@ spec:
                 configMapKeyRef:
                   key: DB_ADAPTER
                   name: env
-            - name: 'DB_ADAPTER:'
-              value: mysql
             - name: DB_DATABASE
               valueFrom:
                 configMapKeyRef:
@@ -209,18 +207,12 @@ spec:
                 configMapKeyRef:
                   key: TOKEN_SECRET
                   name: env
-          image: lo-harbor.yyjzt.com/sassflow/rabbitmq
-          name: sc-rabbitmq
+            - name: TZ
+              value: Asia/Shanghai
+          image: lo-harbor.yyjzt.com/sassflow/organization:latest
+          name: sc-organization
           ports:
-            - containerPort: 5672
-            - containerPort: 15672
+            - containerPort: 8010
           resources: {}
-          volumeMounts:
-            - mountPath: /var/lib/rabbitmq/mnesia
-              name: rabbitmq-claim0
       restartPolicy: Always
-      volumes:
-        - name: rabbitmq-claim0
-          persistentVolumeClaim:
-            claimName: rabbitmq-claim0
 status: {}

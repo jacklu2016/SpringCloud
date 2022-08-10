@@ -6,14 +6,15 @@ metadata:
     kompose.version: 1.24.0 (4a2a0458)
   creationTimestamp: null
   labels:
-    io.kompose.service: gateway-admin
-  name: gateway-admin
+    io.kompose.service: gateway-web
+  name: gateway-web
+  namespace: sc
 spec:
   ports:
-    - name: "8445"
-      port: 8445
-      targetPort: 8445
+    - name: "8443"
+      port: 8443
+      targetPort: 8443
   selector:
-    io.kompose.service: gateway-admin
+    io.kompose.service: gateway-web
 status:
   loadBalancer: {}

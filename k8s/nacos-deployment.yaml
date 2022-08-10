@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose-windows-amd64 -f docker-compose.nacos.yml convert
+    kompose.version: 1.26.1 (a9d05d509)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: nacos
+  name: nacos
+  namespace: sc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: nacos
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose-windows-amd64 -f docker-compose.nacos.yml convert
+        kompose.version: 1.26.1 (a9d05d509)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/sc-net: "true"
+        io.kompose.service: nacos
+    spec:
+      containers:
+        - env:
+            - name: MODE
+              value: standalone
+            - name: PREFER_HOST_MODE
+              value: hostname
+          image: lo-harbor.yyjzt.com/nacos/nacos-server:2.0.3
+          name: sc-nacos-standalone
+          ports:
+            - containerPort: 8848
+          resources: {}
+          volumeMounts:
+            - mountPath: /home/nacos/logs
+              name: nacos-claim0
+      restartPolicy: Always
+      volumes:
+        - name: nacos-claim0
+          persistentVolumeClaim:
+            claimName: nacos-claim0
+status: {}

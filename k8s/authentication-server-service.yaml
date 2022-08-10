@@ -6,14 +6,15 @@ metadata:
     kompose.version: 1.24.0 (4a2a0458)
   creationTimestamp: null
   labels:
-    io.kompose.service: organization
-  name: organization
+    io.kompose.service: authentication-server
+  name: authentication-server
+  namespace: sc
 spec:
   ports:
-    - name: "8010"
-      port: 8010
-      targetPort: 8010
+    - name: "8001"
+      port: 8001
+      targetPort: 8001
   selector:
-    io.kompose.service: organization
+    io.kompose.service: authentication-server
 status:
   loadBalancer: {}

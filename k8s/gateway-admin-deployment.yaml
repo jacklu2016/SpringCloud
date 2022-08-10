@@ -8,8 +8,9 @@ metadata:
   labels:
     io.kompose.service: gateway-admin
   name: gateway-admin
+  namespace: sc
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       io.kompose.service: gateway-admin
@@ -61,8 +62,6 @@ spec:
                 configMapKeyRef:
                   key: DB_ADAPTER
                   name: env
-            - name: 'DB_ADAPTER:'
-              value: mysql
             - name: DB_DATABASE
               valueFrom:
                 configMapKeyRef:
