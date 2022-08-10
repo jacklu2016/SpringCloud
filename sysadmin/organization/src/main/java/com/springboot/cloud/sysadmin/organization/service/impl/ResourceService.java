@@ -83,7 +83,7 @@ public class ResourceService extends ServiceImpl<ResourceMapper, Resource> imple
     }
 
     @Override
-    @Cached(name = "resource4user::", key = "#username", cacheType = CacheType.BOTH,expire = 120)
+    @Cached(name = "resource4user::", key = "#username", cacheType = CacheType.REMOTE,expire = 120)
     public List<Resource> query(String username) {
         //根据用户名查询到用户所拥有的角色
         User user = userService.getByUniqueId(username);

@@ -32,7 +32,7 @@ data:
   REDIS_PORT: "6379"
   REGISTER_HOST: nacos
   REGISTER_PORT: "8848"
-  NACOS_NAMESPACE: TEST
+  NACOS_NAMESPACE: 194056bf-9ad0-4b9d-8fa0-014525235a1c
   SENTINEL_DASHBOARD_HOST: sentinel-dashboard
   SENTINEL_DASHBOARD_PORT: "8021"
   SW_AGENT_OPTS: -javaagent:/skywalking/agent/skywalking-agent.jar -Dskywalking.collector.backend_service=localhost:11800 -Dskywalking.agent.service_name

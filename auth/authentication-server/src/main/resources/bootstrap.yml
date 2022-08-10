@@ -7,10 +7,10 @@ spring:
     nacos:
       discovery:
         server-addr: ${REGISTER_HOST:10.4.14.24}:${REGISTER_PORT:8848}
-        namespace: ${NACOS_NAMESPACE:dev}
+        namespace: ${NACOS_NAMESPACE:f5ceff8e-ebcf-493c-9ab4-614b0478847a}
       config:
         server-addr: ${REGISTER_HOST:10.4.14.24}:${REGISTER_PORT:8848}
-        namespace: ${NACOS_NAMESPACE:dev}
+        namespace: ${NACOS_NAMESPACE:f5ceff8e-ebcf-493c-9ab4-614b0478847a}
         file-extension: yml
     sentinel:
       transport:
