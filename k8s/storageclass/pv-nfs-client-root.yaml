@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  creationTimestamp: "2022-08-09T05:19:36Z"
+  finalizers:
+    - kubernetes.io/pv-protection
+  labels:
+    pv: pv-nfs-client-root
+  name: pv-nfs-client-root
+  resourceVersion: "848073"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 100Gi
+  mountOptions:
+    - nolock
+  nfs:
+    path: /var/services/homes/bigdata/k8s/storageclass
+    server: 10.4.6.32
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+status:
+  phase: Available

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfs-client-provisioner
+  labels:
+    app: nfs-client-provisioner
+  # replace with namespace where provisioner is deployed
+  namespace: sc
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: nfs-client-provisioner
+  template:
+    metadata:
+      labels:
+        app: nfs-client-provisioner
+    spec:
+      serviceAccountName: nfs-client-provisioner
+      nodeName: k8s1
+
+      containers:
+        - name: nfs-client-root-provisioner
+          #  image: gcr.io/k8s-staging-sig-storage/nfs-subdir-external-provisioner:v4.0.0
+          image: lo-harbor.yyjzt.com/sassflow/external_storage/nfs-client-provisioner:latest
+          volumeMounts:
+            - mountPath: /persistentvolumes
+              name: nfs-client-root
+          env:
+            - name: PROVISIONER_NAME
+              value: k8s-sigs.io/nfs-subdir-external-provisioner
+            # value: fuseim.pri/ifs
+
+      volumes:
+        - name: nfs-client-root
+          hostPath:
+            # directory location on host
+            path: /nas-data/storageclass
+            # this field is optional
+            type: DirectoryOrCreate

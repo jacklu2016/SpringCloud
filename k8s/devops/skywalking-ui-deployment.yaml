@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: D:\learn\java\k8s\kompose-windows-amd64.exe -f .\docker-compose.devops.yml convert
+    kompose.version: 1.26.1 (a9d05d509)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: skywalking-ui
+  name: skywalking-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: skywalking-ui
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: D:\learn\java\k8s\kompose-windows-amd64.exe -f .\docker-compose.devops.yml convert
+        kompose.version: 1.26.1 (a9d05d509)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/sc-net: "true"
+        io.kompose.service: skywalking-ui
+    spec:
+      containers:
+        - env:
+            - name: collector.ribbon.listOfServers
+              value: skywalking-oap:12800
+          image: wutang/skywalking-ui:6.1.0
+          name: skywalking-ui
+          ports:
+            - containerPort: 8080
+          resources: {}
+      restartPolicy: Always
+status: {}

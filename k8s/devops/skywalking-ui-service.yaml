@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: D:\learn\java\k8s\kompose-windows-amd64.exe -f .\docker-compose.devops.yml convert
+    kompose.version: 1.26.1 (a9d05d509)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: skywalking-ui
+  name: skywalking-ui
+spec:
+  ports:
+    - name: "8080"
+      port: 8080
+      targetPort: 8080
+  selector:
+    io.kompose.service: skywalking-ui
+status:
+  loadBalancer: {}

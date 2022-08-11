@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: D:\learn\java\k8s\kompose-windows-amd64.exe -f .\docker-compose.devops.yml convert
+    kompose.version: 1.26.1 (a9d05d509)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: kibana
+  name: kibana
+  namespace: sc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: kibana
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: D:\learn\java\k8s\kompose-windows-amd64.exe -f .\docker-compose.devops.yml convert
+        kompose.version: 1.26.1 (a9d05d509)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/sc-net: "true"
+        io.kompose.service: kibana
+    spec:
+      containers:
+        - image: kibana:5.6.14
+          name: sc-kibana
+          ports:
+            - containerPort: 5601
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/logs/kibana
+              name: kibana-claim0
+            - mountPath: /etc/kibana/kibana.yml
+              name: kibana-claim1
+      restartPolicy: Always
+      volumes:
+        - name: kibana-claim0
+          persistentVolumeClaim:
+            claimName: kibana-claim0
+        - name: kibana-claim1
+          persistentVolumeClaim:
+            claimName: kibana-claim1
+status: {}
