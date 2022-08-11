@@ -8,6 +8,7 @@ metadata:
   labels:
     io.kompose.service: zipkin-server
   name: zipkin-server
+  namespace: sc
 spec:
   replicas: 1
   selector:
@@ -28,7 +29,7 @@ spec:
       containers:
         - env:
             - name: ES_HOSTS
-              value: http://elasticsearch:9200
+              value: http://elasticsearch-service:9200
             - name: RABBIT_ADDRESSES
               value: rabbitmq:5672
             - name: RABBIT_MQ_PORT
@@ -39,7 +40,7 @@ spec:
               value: guest
             - name: STORAGE_TYPE
               value: elasticsearch
-          image: openzipkin/zipkin
+          image: lo-harbor.yyjzt.com/sassflow/openzipkin/zipkin:latest
           name: sc-zipkin-server
           ports:
             - containerPort: 9411

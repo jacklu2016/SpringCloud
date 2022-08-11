@@ -1,0 +1,125 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: es-cluster
+  namespace: sc
+spec:
+  version: 7.10.1
+  nodeSets:
+    - name: master-nodes
+      count: 1
+      config:
+        node.master: true
+        node.data: false
+      podTemplate:
+        spec:
+          initContainers:
+            - name: sysctl
+              securityContext:
+                privileged: true
+                runAsUser: 0
+              command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
+          containers:
+            - name: elasticsearch
+              image: lo-harbor.yyjzt.com/sassflow/elasticsearch:7.10.1
+              env:
+                - name: ES_JAVA_OPTS
+                  value: "-Xms6g -Xmx6g"
+              resources:
+                limits:
+                  memory: 10Gi
+                  cpu: 4
+                requests:
+                  memory: 10Gi
+                  cpu: 4
+          imagePullSecrets:
+            - name: default-secret
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 2Gi
+
+    - name: data-nodes
+      count: 1
+      config:
+        node.master: false
+        node.data: true
+      podTemplate:
+        spec:
+          initContainers:
+            - name: sysctl
+              securityContext:
+                privileged: true
+                runAsUser: 0
+              command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
+          containers:
+            - name: elasticsearch
+              image: lo-harbor.yyjzt.com/sassflow/elasticsearch:7.10.1
+              env:
+                - name: ES_JAVA_OPTS
+                  value: "-Xms8g -Xmx8g"
+              resources:
+                limits:
+                  memory: 10Gi
+                  cpu: 4
+                requests:
+                  memory: 10Gi
+                  cpu: 4
+          imagePullSecrets:
+            - name: default-secret
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 2Gi
+
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-es-master
+  labels:
+    pv: pv-es-master
+spec:
+  mountOptions:
+    - nolock
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  nfs:
+    server:  10.4.6.32  #这里请写nfs服务器的ip
+    path: /var/services/homes/bigdata/k8s/es/esmaster
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-es-data
+  labels:
+    pv: pv-es-data
+spec:
+  mountOptions:
+    - nolock
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  nfs:
+    server:  10.4.6.32  #这里请写nfs服务器的ip
+    path: /var/services/homes/bigdata/k8s/es/data

@@ -1,0 +1,26 @@
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: kibana
+  namespace: sc
+spec:
+  version: 7.10.1
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true
+  count: 1
+  containers:
+    - env:
+      image: lo-harbor.yyjzt.com/sassflow/kibana:7.10.1
+  elasticsearchRef:
+    name: es-cluster   # kubectl -n es get elasticsearch 获取
+  podTemplate:
+    spec:
+      containers:
+        - name: kibana
+          resources:
+            limits:
+              cpu: 1000m
+            requests:
+              cpu: 100m

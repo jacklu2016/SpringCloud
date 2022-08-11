@@ -5,6 +5,7 @@ metadata:
   labels:
     io.kompose.service: kibana-claim0
   name: kibana-claim0
+  namespace: sc
 spec:
   accessModes:
     - ReadWriteOnce

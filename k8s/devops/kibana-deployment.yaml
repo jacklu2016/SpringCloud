@@ -27,22 +27,29 @@ spec:
         io.kompose.service: kibana
     spec:
       containers:
-        - image: kibana:5.6.14
+        - env:
+            #- name: ELASTICSEARCH_URL
+            #  value: http://elasticsearch-service:9200
+            - name: ELASTICSEARCH_HOSTS
+              value: http://elasticsearch-service:9200
+            - name: TZ
+              value: "Asia/Shanghai"
+          image: lo-harbor.yyjzt.com/sassflow/kibana:7.10.1
           name: sc-kibana
           ports:
             - containerPort: 5601
           resources: {}
           volumeMounts:
             - mountPath: /var/logs/kibana
-              name: kibana-claim0
-            - mountPath: /etc/kibana/kibana.yml
               name: kibana-claim1
+            #- mountPath: /etc/kibana/kibana.yml
+            #  name: kibana-claim1
       restartPolicy: Always
       volumes:
-        - name: kibana-claim0
-          persistentVolumeClaim:
-            claimName: kibana-claim0
         - name: kibana-claim1
           persistentVolumeClaim:
             claimName: kibana-claim1
+        #- name: kibana-claim1
+        #  persistentVolumeClaim:
+        #    claimName: kibana-claim1
 status: {}

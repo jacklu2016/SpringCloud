@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/backend-protocol: ' HTTP'
+  name: ingress-es
+  namespace: sc
+spec:
+  rules:
+    - host: es-test.zhsn.com
+      http:
+        paths:
+          - backend:
+              serviceName: es-cluster-es-http
+              servicePort: 9200
+            path: /
