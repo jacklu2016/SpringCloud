@@ -18,6 +18,10 @@ data:
         path: ${path.config}/modules.d/*.yml
         # Reload module configs as they change:
         reload.enabled: false
+      multiline:
+        pattern: '^[0-2][0-9]:[0-5][0-9]:[0-5][0-9]'
+        negate: true
+        match: after
 
     output.elasticsearch:
       hosts: ['es-cluster-es-http.sc.svc.cluster.local:9200']
