@@ -9,10 +9,17 @@ spec:
     tls:
       selfSignedCertificate:
         disabled: true
+    service:
+      spec:
+        type: NodePort
+        ports:
+          - name: "5601"
+            port: 5601
+            targetPort: 5601
+            nodePort: 5601
+
   count: 1
-  containers:
-    - env:
-      image: lo-harbor.yyjzt.com/sassflow/kibana:7.10.1
+  image: lo-harbor.yyjzt.com/sassflow/kibana:7.10.1
   elasticsearchRef:
     name: es-cluster   # kubectl -n es get elasticsearch 获取
   podTemplate:

@@ -29,7 +29,11 @@ spec:
       containers:
         - env:
             - name: ES_HOSTS
-              value: http://elasticsearch-service:9200
+              value: http://es-cluster-es-http:9200
+            - name: ES_USERNAME
+              value: elastic
+            - name: ES_PASSWORD
+              value: P@ssw0rd
             - name: RABBIT_ADDRESSES
               value: rabbitmq:5672
             - name: RABBIT_MQ_PORT

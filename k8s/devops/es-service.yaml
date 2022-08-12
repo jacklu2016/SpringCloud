@@ -45,7 +45,7 @@ spec:
                 storage: 2Gi
 
     - name: data-nodes
-      count: 1
+      count: 2
       config:
         node.master: false
         node.data: true
@@ -123,3 +123,22 @@ spec:
   nfs:
     server:  10.4.6.32  #这里请写nfs服务器的ip
     path: /var/services/homes/bigdata/k8s/es/data
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-es-data1
+  labels:
+    pv: pv-es-data1
+spec:
+  mountOptions:
+    - nolock
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  nfs:
+    server:  10.4.6.32  #这里请写nfs服务器的ip
+    path: /var/services/homes/bigdata/k8s/es/data1

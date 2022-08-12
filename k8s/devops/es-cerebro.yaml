@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cerebro
+  name: cerebro
+  namespace: sc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cerebro
+  template:
+    metadata:
+      labels:
+        app: cerebro
+      name: cerebro
+    spec:
+      containers:
+        - image: lo-harbor.yyjzt.com/sassflow/lmenezes/cerebro:0.8.3
+          imagePullPolicy: IfNotPresent
+          name: cerebro
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+            requests:
+              cpu: 1
+              memory: 1Gi
+          volumeMounts:
+            - name: cerebro-conf
+              mountPath: /etc/cerebro
+      volumes:
+        - name: cerebro-conf
+          persistentVolumeClaim:
+            claimName: pvc-cerebro
+
+      imagePullSecrets:
+        - name: default-secret
+
+---
+#cerebro数据节点的持久卷
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-cerebro
+  labels:
+    pv: pv-cerebro
+spec:
+  mountOptions:
+    - nolock
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  nfs:
+    server:  10.4.6.32  #这里请写nfs服务器的ip
+    path: /var/services/homes/bigdata/k8s/es/cerebro
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-cerebro
+  namespace: sc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      pv: pv-cerebro
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: cerebro
+  name: cerebro
+  namespace: sc
+spec:
+  ports:
+    - port: 9000
+      protocol: TCP
+      targetPort: 9000
+      nodePort: 8090
+  selector:
+    app: cerebro
+  type: NodePort
